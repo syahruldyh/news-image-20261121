@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The World on One Page — Saturday 21 November 2026</title>
+<style>
+@font-face { font-family: "Playfair Display"; src: url("fonts/PlayfairDisplay-Regular.ttf") format("truetype"); font-weight: 100 1000; }
+@font-face { font-family: "Archivo"; src: url("fonts/Archivo.ttf") format("truetype"); font-weight: 100 1000; }
+@font-face { font-family: "Source Serif"; src: url("fonts/SourceSerif.ttf") format("truetype"); font-weight: 100 1000; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1024px; height: 1024px; }
+body { background: #f7f1e2; font-family: "Source Serif", serif; color: #141210; }
+.sheet { width: 1024px; height: 1024px; padding: 9px; background: #f7f1e2; }
+.frame { border: 2.5px solid #141210; height: 100%; padding: 3px; }
+.inner { border: 1px solid #141210; height: 100%; padding: 7px 12px 6px 12px; display: flex; flex-direction: column; }
+
+/* kicker */
+.kicker { display: flex; justify-content: space-between; align-items: baseline; }
+.kicker .l { font-family: "Archivo"; font-weight: 800; font-size: 11.5px; letter-spacing: 2.2px; color: #b3231b; }
+.kicker .r { font-family: "Archivo"; font-weight: 600; font-size: 10.5px; letter-spacing: 1.6px; color: #141210; }
+
+/* masthead */
+.masthead { text-align: center; border-top: 2.5px solid #141210; border-bottom: 1px solid #141210; margin-top: 3px; padding: 1px 0 3px 0; }
+.masthead h1 { font-family: "Playfair Display"; font-weight: 900; font-size: 62px; letter-spacing: -0.5px; white-space: nowrap; line-height: 1.02; }
+
+/* UTC strip */
+.utc { display: flex; align-items: stretch; border-bottom: 1px solid #141210; padding: 3px 0 3px 0; gap: 10px; }
+.utc .label { background: #b3231b; color: #f7f1e2; font-family: "Archivo"; font-weight: 800; font-size: 9.5px; letter-spacing: 1.2px; line-height: 1.25; padding: 4px 7px; text-align: center; display: flex; align-items: center; }
+.utc .stops { flex: 1; display: flex; justify-content: space-between; align-items: flex-start; position: relative; }
+.utc .stops::before { content: ""; position: absolute; left: 6px; right: 6px; top: 4px; border-top: 1.5px solid #141210; }
+.utc .stop { text-align: center; width: 16.6%; position: relative; padding-top: 11px; }
+.utc .stop::before { content: ""; position: absolute; top: 1.5px; left: 50%; margin-left: -3px; width: 6px; height: 6px; border-radius: 50%; background: #b3231b; }
+.utc .stop b { display: block; font-family: "Archivo"; font-weight: 700; font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; }
+.utc .stop span { display: block; font-size: 9.5px; font-style: italic; line-height: 1.08; }
+
+/* numbers strip */
+.numbers { display: flex; border-bottom: 2.5px solid #141210; padding: 2px 0 2px 0; }
+.numbers .cell { flex: 1; text-align: center; border-left: 1px solid #c9bfa5; padding: 0 4px; }
+.numbers .cell:first-child { border-left: none; }
+.numbers .n { font-family: "Playfair Display"; font-weight: 800; font-size: 20px; line-height: 1; }
+.numbers .n.red { color: #b3231b; }
+.numbers .c { font-family: "Archivo"; font-weight: 600; font-size: 7.8px; letter-spacing: 0.7px; text-transform: uppercase; line-height: 1.18; margin-top: 1px; }
+
+/* heroes */
+.heroes { display: flex; gap: 10px; padding: 5px 0 0 0; }
+.hero { flex: 1; border-top: 3px solid #141210; }
+.hero .art { width: 100%; height: 90px; object-fit: cover; display: block; }
+.hero .kick { display: flex; align-items: center; gap: 5px; margin-top: 3px; }
+.badge { background: #b3231b; color: #fff; font-family: "Archivo"; font-weight: 800; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.hero .badge { width: 21px; height: 21px; font-size: 12.5px; }
+.hero .sec { font-family: "Archivo"; font-weight: 800; font-size: 10px; letter-spacing: 1.1px; color: #b3231b; }
+.tag { margin-left: auto; font-family: "Archivo"; font-weight: 700; font-size: 7.8px; letter-spacing: 0.6px; padding: 2px 4px; border-radius: 2px; white-space: nowrap; }
+.tag.conf { background: #dcefe2; color: #14532d; }
+.tag.rep { background: #e2e8f0; color: #334155; }
+.tag.off { background: #fdeeda; color: #92400e; }
+.hero h2 { font-family: "Playfair Display"; font-weight: 800; font-size: 19.6px; line-height: 1.05; margin-top: 3px; }
+.hero p { font-size: 10.4px; line-height: 1.15; margin-top: 3px; text-align: justify; }
+
+/* small cards */
+.grid { display: flex; flex-direction: column; gap: 3px; padding-top: 3px; }
+.grow { display: flex; gap: 8px; }
+.card { flex: 1; border-top: 3.5px solid #141210; display: flex; flex-direction: column; }
+.card .art { width: 100%; height: 38px; display: block; }
+.card .kick { display: flex; align-items: center; gap: 4px; margin-top: 2px; }
+.card .badge { width: 15px; height: 15px; font-size: 9px; }
+.card .sec { font-family: "Archivo"; font-weight: 800; font-size: 7.8px; letter-spacing: 0.7px; color: #b3231b; }
+.card h3 { font-family: "Playfair Display"; font-weight: 700; font-size: 12.7px; line-height: 1.09; margin-top: 1px; }
+.card p { font-size: 9.3px; line-height: 1.2; margin-top: 1px; text-align: left; }
+.card .tag { margin: 1px 0 0 0; align-self: flex-start; }
+
+/* bottom band */
+.bottom { display: flex; gap: 12px; border-top: 2.5px solid #141210; margin-top: 2px; padding-top: 2px; }
+.mapbox { width: 300px; flex: none; }
+.mapbox h4, .listbox h4 { font-family: "Archivo"; font-weight: 800; font-size: 10.5px; letter-spacing: 1.6px; }
+.mapwrap { position: relative; margin-top: 3px; }
+.mapwrap svg { display: block; width: 100%; }
+.mk { position: absolute; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; border-radius: 50%; background: #b3231b; color: #fff; font-family: "Archivo"; font-weight: 800; font-size: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid #f7f1e2; }
+.maplegend { font-family: "Archivo"; font-size: 8px; font-weight: 600; letter-spacing: 0.5px; margin-top: 3px; color: #44403a; }
+.listbox { flex: 1; }
+.listcols { display: flex; gap: 12px; margin-top: 3px; }
+.lcol { flex: 1; display: flex; flex-direction: column; gap: 0.5px; }
+.item { font-size: 8.9px; line-height: 1.06; padding-left: 17px; position: relative; }
+.item .sq { position: absolute; left: 0; top: 0.5px; width: 13px; height: 13px; color: #fff; font-family: "Archivo"; font-weight: 800; font-size: 8px; display: flex; align-items: center; justify-content: center; border-radius: 1.5px; }
+.item b { font-family: "Archivo"; font-weight: 700; font-size: 9.6px; }
+
+/* date check + footer */
+.datecheck { border: 1.5px solid #b3231b; padding: 2px 8px 3px 8px; margin-top: 3px; font-size: 9.5px; line-height: 1.22; text-align: justify; }
+.datecheck b { color: #b3231b; font-family: "Archivo"; font-size: 10px; letter-spacing: 1px; }
+.footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1px; gap: 5px; }
+.footer .l { font-style: italic; font-size: 8.1px; white-space: nowrap; }
+.footer .mid { display: flex; gap: 3px; align-items: center; font-family: "Archivo"; font-size: 7px; font-weight: 600; color: #44403a; white-space: nowrap; }
+.footer .r { font-family: "Archivo"; font-size: 7.2px; font-weight: 600; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="sheet"><div class="frame"><div class="inner">
+
+<div class="kicker">
+  <div class="l">THE WORLD ON ONE PAGE</div>
+  <div class="r">44 STORIES &middot; 6 CONTINENTS &middot; 12 FIELDS &middot; EVERY ONE FROM THIS SATURDAY</div>
+</div>
+
+<div class="masthead"><h1>Saturday 21 November 2026</h1></div>
+
+<div class="utc">
+  <div class="label">THE DAY<br>IN UTC</div>
+  <div class="stops">
+    <div class="stop"><b>Overnight</b><span>Kryvyi Rih struck</span></div>
+    <div class="stop"><b>Morning</b><span>Rutte in Warsaw</span></div>
+    <div class="stop"><b>Midday</b><span>COP31 deadlocked</span></div>
+    <div class="stop"><b>Afternoon</b><span>Crews pack up in Antalya</span></div>
+    <div class="stop"><b>Evening</b><span>Sinaloa capture</span></div>
+    <div class="stop"><b>Night</b><span>Talks run on in Antalya</span></div>
+  </div>
+</div>
+
+<div class="numbers">
+  <div class="cell"><div class="n red">148</div><div class="c">drones launched overnight</div></div>
+  <div class="cell"><div class="n">3</div><div class="c">Russian objects on NATO soil</div></div>
+  <div class="cell"><div class="n red">-3.7%</div><div class="c">S&amp;P 500 on Friday</div></div>
+  <div class="cell"><div class="n">69%</div><div class="c">dengue cut in Brazil</div></div>
+  <div class="cell"><div class="n">8 yrs</div><div class="c">BepiColombo's cruise to Mercury</div></div>
+  <div class="cell"><div class="n">700,000</div><div class="c">displaced in Ethiopia</div></div>
+</div>
+
+<div class="heroes">
+  <div class="hero">
+    <img class="art" src="art/hero1.jpg" alt="" style="object-position: center 60%">
+    <div class="kick"><span class="badge">1</span><span class="sec">EUROPE &middot; UKRAINE WAR</span><span class="tag conf">CONFIRMED &middot; AP</span></div>
+    <h2>Russian missiles land in Poland; two die in Zelenskyy's hometown</h2>
+    <p>A Kh-101, a second missile and a jet drone fell in the south-east during Russia's biggest November barrage; Tusk calls it a deliberate provocation. A double-tap strike on Kryvyi Rih killed a boy of 7 and a woman of 20, and wounded 60.</p>
+  </div>
+  <div class="hero">
+    <img class="art" src="art/hero2.jpg" alt="" style="object-position: center 42%">
+    <div class="kick"><span class="badge">2</span><span class="sec">GLOBAL &middot; CLIMATE</span><span class="tag conf">CONFIRMED &middot; REUTERS</span></div>
+    <h2>COP31 runs into overtime with fossil fuels struck from the draft</h2>
+    <p>Nearly 200 nations stayed deadlocked in Antalya a day past the scheduled close, over fossil fuels and a dropped $120bn adaptation target. The EU's Hoekstra: it is 'a good deal or no deal'.</p>
+  </div>
+  <div class="hero">
+    <img class="art" src="art/hero3.jpg" alt="" style="object-position: center 38%">
+    <div class="kick"><span class="badge">3</span><span class="sec">LATIN AMERICA &middot; CRIME</span><span class="tag conf">CONFIRMED &middot; AP</span></div>
+    <h2>Mexico captures 'El Chapo Isidro', one of the FBI's most wanted</h2>
+    <p>Beltr&aacute;n Leyva leader Fausto Isidro Meza Flores was seized overnight in Guasave, Sinaloa, with help from US intelligence. Violence flared in the state after the arrest.</p>
+  </div>
+</div>
+
+<div class="grid">
+<div class="grow">
+  <div class="card" style="border-top-color:#b3231b">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#26303b"/><path d="M0 31 H160 M0 21 H160 M0 11 H160" stroke="#3d4c5c" stroke-width="1"/><polyline points="4,10 34,14 58,12 84,22 108,20 132,30 156,36" fill="none" stroke="#e05244" stroke-width="2.5"/><circle cx="156" cy="36" r="3" fill="#e05244"/></svg>
+    <div class="kick"><span class="badge">4</span><span class="sec">US &middot; MARKETS</span></div>
+    <h3>AI sell-off turns into a Friday rout: S&amp;P 500 falls 3.7%</h3>
+    <p>The Nasdaq erased its 2026 gains as chip shares plunged; Tokyo's Nikkei fell 5.06% and gold slid 4.62%.</p>
+    <span class="tag conf">CONFIRMED &middot; AP</span>
+  </div>
+  <div class="card" style="border-top-color:#1d4e89">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#7fa3b8"/><path d="M0 0 H70 L64 12 L84 16 L78 26 L96 30 L92 42 H0 Z" fill="#d9c08a"/><path d="M118 0 H160 V42 H128 L122 26 L132 14 L120 8 Z" fill="#d9c08a"/><path d="M104 20 l2.2 4.4 4.8.7 -3.5 3.4.8 4.8 -4.3-2.3 -4.3 2.3.8-4.8 -3.5-3.4 4.8-.7 Z" fill="#b3231b"/></svg>
+    <div class="kick"><span class="badge">5</span><span class="sec">MIDDLE EAST &middot; US POLICY</span></div>
+    <h3>Trump weighs new strikes on Iran as Israel presses</h3>
+    <p>Officials say the president is weighing another round of extensive strikes, citing new intelligence on Iranian capabilities.</p>
+    <span class="tag rep">REPORTED &middot; NYT</span>
+  </div>
+  <div class="card" style="border-top-color:#0f766e">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#cdbd97"/><rect y="30" width="160" height="12" fill="#8a7a5c"/><rect x="26" y="8" width="5" height="26" fill="#5c5344"/><g transform="rotate(-18 31 12)"><rect x="31" y="9" width="72" height="6" fill="#f3ead2"/><rect x="40" y="9" width="10" height="6" fill="#b3231b"/><rect x="58" y="9" width="10" height="6" fill="#b3231b"/><rect x="76" y="9" width="10" height="6" fill="#b3231b"/></g><rect x="126" y="6" width="16" height="11" fill="#1d4e89"/><rect x="126" y="6" width="16" height="5.5" fill="#141210"/><rect x="126" y="11.5" width="16" height="5.5" fill="#f3ead2"/></svg>
+    <div class="kick"><span class="badge">6</span><span class="sec">EUROPE &middot; ESTONIA</span></div>
+    <h3>Estonia to shut every road crossing into Russia on 1 December</h3>
+    <p>Tallinn blames the GRU for a drone-factory arson plot; queues formed on Saturday as Moscow cried 'new iron curtain'.</p>
+    <span class="tag rep">REPORTED &middot; EURONEWS</span>
+  </div>
+  <div class="card" style="border-top-color:#b45309">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#a8bfca"/><rect y="30" width="160" height="12" fill="#5b84a0"/><path d="M18 30 L26 22 H118 L110 30 Z" fill="#33393f"/><rect x="38" y="15" width="14" height="7" fill="#b3231b"/><rect x="54" y="15" width="14" height="7" fill="#b45309"/><rect x="70" y="15" width="14" height="7" fill="#0f766e"/><path d="M96 20 q4-8 0-13 q7 4 6 10 q6-3 5-9 q6 7 3 13 q-2 5-8 4 q-6-1-6-5Z" fill="#e07b2a"/><path d="M98 8 q3-4 8-4" stroke="#9aa3a8" stroke-width="2.5" fill="none"/></svg>
+    <div class="kick"><span class="badge">7</span><span class="sec">BALTIC &middot; SECURITY</span></div>
+    <h3>Drone-hit Russian cargo ship drifts into Finnish waters</h3>
+    <p>The Sparta II caught fire west of Gogland after two drones struck; 80 drones were downed over the Leningrad region.</p>
+    <span class="tag rep">REPORTED &middot; REUTERS</span>
+  </div>
+  <div class="card" style="border-top-color:#6d28d9">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#232733"/><circle cx="52" cy="21" r="13" fill="#9aa0a8"/><circle cx="47" cy="17" r="3" fill="#7c828b"/><circle cx="57" cy="25" r="2.4" fill="#7c828b"/><circle cx="50" cy="27" r="1.7" fill="#7c828b"/><rect x="104" y="17" width="14" height="8" fill="#d9c08a"/><rect x="88" y="14" width="14" height="14" fill="#41618c"/><rect x="120" y="14" width="14" height="14" fill="#41618c"/><circle cx="97" cy="10" r="1.4" fill="#f3ead2"/><circle cx="140" cy="33" r="1.2" fill="#f3ead2"/><circle cx="24" cy="8" r="1.2" fill="#f3ead2"/></svg>
+    <div class="kick"><span class="badge">8</span><span class="sec">SPACE &middot; MERCURY</span></div>
+    <h3>BepiColombo slips into Mercury orbit after eight years</h3>
+    <p>The ESA-JAXA probe ends a cruise of looping flybys and begins mapping the innermost planet.</p>
+    <span class="tag conf">CONFIRMED &middot; ESA</span>
+  </div>
+  <div class="card" style="border-top-color:#475569">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#e7dfc8"/><g stroke="#475569" stroke-width="1.6" fill="none"><path d="M70 22 L50 10 M72 24 L52 34 M88 22 L110 10 M86 24 L108 34 M74 28 L64 40 M84 28 L94 40"/></g><ellipse cx="79" cy="20" rx="7" ry="10" fill="#5b6b52"/><circle cx="79" cy="8" r="4" fill="#5b6b52"/><path d="M79 12 L74 2 M79 12 L86 3" stroke="#475569" stroke-width="1.4"/><ellipse cx="62" cy="13" rx="9" ry="4" fill="#b9c4ad" transform="rotate(-24 62 13)"/><ellipse cx="96" cy="13" rx="9" ry="4" fill="#b9c4ad" transform="rotate(24 96 13)"/><path d="M84 16 q10 4 12 12" stroke="#8a4b3a" stroke-width="1.8" fill="none"/></svg>
+    <div class="kick"><span class="badge">9</span><span class="sec">HEALTH &middot; BRAZIL</span></div>
+    <h3>Bacteria-carrying mosquitoes cut dengue cases by 69%</h3>
+    <p>Releases of Wolbachia-carrying mosquitoes drove infections down across the Brazilian study cities.</p>
+    <span class="tag rep">REPORTED &middot; STUDY</span>
+  </div>
+</div>
+<div class="grow">
+  <div class="card" style="border-top-color:#1d4e89">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#1d2f4a"/><circle cx="80" cy="21" r="14" fill="none" stroke="#d9a441" stroke-width="3"/><circle cx="80" cy="21" r="8.5" fill="none" stroke="#7fa3b8" stroke-width="1.6"/><circle cx="94" cy="21" r="2" fill="#e05244"/><circle cx="66" cy="21" r="1.6" fill="#f3ead2"/><circle cx="80" cy="7" r="1.4" fill="#f3ead2"/></svg>
+    <div class="kick"><span class="badge">10</span><span class="sec">SCIENCE &middot; CERN</span></div>
+    <h3>CERN finds first evidence of an ultra-rare particle decay</h3>
+    <p>Physicists in Geneva report the first evidence of a decay seen almost never in the Standard Model.</p>
+    <span class="tag rep">REPORTED &middot; CERN</span>
+  </div>
+  <div class="card" style="border-top-color:#0f766e">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#dce8e2"/><rect x="62" y="10" width="36" height="26" rx="7" fill="#33565e"/><rect x="76" y="3" width="3.5" height="8" fill="#33565e"/><circle cx="79.5" cy="3.5" r="2.6" fill="#b3231b"/><circle cx="71" cy="21" r="3.4" fill="#f3ead2"/><circle cx="89" cy="21" r="3.4" fill="#f3ead2"/><rect x="72" y="29" width="16" height="3" rx="1.5" fill="#f3ead2"/><path d="M62 24 H48 M98 24 H112" stroke="#33565e" stroke-width="4"/></svg>
+    <div class="kick"><span class="badge">11</span><span class="sec">GLOBAL &middot; AI WEAPONS</span></div>
+    <h3>UN talks agree to keep working on rules for AI weapons</h3>
+    <p>Geneva delegates voiced a clear commitment to limit autonomous weapons but fell short of enforceable guidelines.</p>
+    <span class="tag rep">REPORTED &middot; UN</span>
+  </div>
+  <div class="card" style="border-top-color:#b3231b">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#5d7350"/><path d="M0 36 H160" stroke="#485c3e" stroke-width="5"/><g transform="rotate(-24 80 21)"><ellipse cx="80" cy="21" rx="19" ry="11.5" fill="#7a4a2b"/><path d="M68 21 h24" stroke="#f3ead2" stroke-width="2"/><path d="M74 17.5 v7 M80 16.5 v9 M86 17.5 v7" stroke="#f3ead2" stroke-width="1.6"/></g></svg>
+    <div class="kick"><span class="badge">12</span><span class="sec">SPORT &middot; RUGBY</span></div>
+    <h3>England beat New Zealand by a record margin at Twickenham</h3>
+    <p>A record rout headlines the autumn internationals in London.</p>
+    <span class="tag conf">CONFIRMED &middot; AP</span>
+  </div>
+  <div class="card" style="border-top-color:#b45309">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#b9cdd6"/><rect y="29" width="160" height="13" fill="#4a7590"/><path d="M14 29 L20 24 H138 L146 29 Z" fill="#413c35"/><rect x="112" y="16" width="16" height="8" fill="#6b655c"/><rect x="30" y="20" width="52" height="4" fill="#6b655c"/><path d="M44 22 q3-7 0-11 q6 3 5 9 q5-2 4-8 q5 6 3 11 q-2 4-7 3 q-5-1-5-4Z" fill="#e07b2a"/></svg>
+    <div class="kick"><span class="badge">13</span><span class="sec">GULF &middot; ENERGY</span></div>
+    <h3>Two tankers burn after hitting mines near Hormuz, Iran says</h3>
+    <p>Iranian officials also assert a missile targeted a US F-16 over the Gulf; neither claim is independently confirmed.</p>
+    <span class="tag off">OFFICIALS &middot; IRAN</span>
+  </div>
+  <div class="card" style="border-top-color:#6d28d9">
+    <svg class="art" viewBox="0 0 160 42" preserveAspectRatio="none"><rect width="160" height="42" fill="#e3d5b8"/><g transform="rotate(32 66 14)"><rect x="48" y="9" width="36" height="10" rx="3" fill="#7a4a2b"/><rect x="80" y="12" width="26" height="5" rx="2.5" fill="#7a4a2b"/></g><rect x="38" y="31" width="66" height="5" fill="#8a6a42"/><rect x="42" y="36" width="58" height="3" fill="#a5854f"/></svg>
+    <div class="kick"><span class="badge">14</span><span class="sec">US &middot; JUSTICE</span></div>
+    <h3>Man convicted of starting the deadly Palisades fire</h3>
+    <p>A Los Angeles jury finds the accused guilty of igniting the blaze that devastated Pacific Palisades.</p>
+    <span class="tag conf">CONFIRMED &middot; COURT</span>
+  </div>
+</div>
+</div>
+
+<div class="bottom">
+  <div class="mapbox">
+    <h4>WHERE IT HAPPENED</h4>
+    <div class="mapwrap">
+      <svg id="worldmap" viewBox="0 0 480 135"></svg>
+      <span class="mk" style="left:61.5%;top:40.6%">1</span>
+      <span class="mk" style="left:59.8%;top:52.6%">2</span>
+      <span class="mk" style="left:20.1%;top:60.4%">3</span>
+      <span class="mk" style="left:29.4%;top:45.6%">4</span>
+      <span class="mk" style="left:64.2%;top:58.3%">5</span>
+      <span class="mk" style="left:54.0%;top:28.6%">6</span>
+      <span class="mk" style="left:60.4%;top:27.4%">7</span>
+      <span class="mk" style="left:93.0%;top:7.0%">8</span>
+      <span class="mk" style="left:35.6%;top:92.6%">9</span>
+      <span class="mk" style="left:55.2%;top:40.8%">10</span>
+      <span class="mk" style="left:50.6%;top:44.8%">11</span>
+      <span class="mk" style="left:47.2%;top:35.6%">12</span>
+      <span class="mk" style="left:67.6%;top:62.5%">13</span>
+      <span class="mk" style="left:17.2%;top:51.9%">14</span>
+    </div>
+    <div class="maplegend">STORIES 1-14 BY PLACE &middot; EUROPE 6 &middot; ASIA 3 &middot; N. AMERICA 3 &middot; S. AMERICA 1 &middot; SPACE 1</div>
+  </div>
+  <div class="listbox">
+    <h4>ALSO ON SATURDAY 21 NOVEMBER</h4>
+    <div class="listcols">
+      <div class="lcol">
+        <div class="item"><span class="sq" style="background:#b3231b">15</span><b>Kyiv:</b> bridges damaged and power cut in the overnight barrage</div>
+        <div class="item"><span class="sq" style="background:#1d4e89">16</span><b>Washington:</b> Trump calls the Poland missiles 'a mistake' by Putin</div>
+        <div class="item"><span class="sq" style="background:#0f766e">17</span><b>Washington:</b> Trump threatens a tax on firms building data centres abroad</div>
+        <div class="item"><span class="sq" style="background:#b45309">18</span><b>US:</b> FBI criminal database and USDA reportedly hacked</div>
+        <div class="item"><span class="sq" style="background:#6d28d9">19</span><b>New York:</b> man sentenced over a plot to kill a Sikh leader</div>
+        <div class="item"><span class="sq" style="background:#475569">20</span><b>Paris:</b> police officers sentenced over the racist beating of Michel Zecler</div>
+        <div class="item"><span class="sq" style="background:#b3231b">21</span><b>Haiti:</b> Salvadoran troops fight gangs in Port-au-Prince</div>
+        <div class="item"><span class="sq" style="background:#1d4e89">22</span><b>Ethiopia:</b> 700,000 people displaced in the south</div>
+        <div class="item"><span class="sq" style="background:#0f766e">23</span><b>DR Congo:</b> fighting widens in the east</div>
+        <div class="item"><span class="sq" style="background:#b45309">24</span><b>Nigeria:</b> boat of funeral mourners capsizes in Bayelsa State</div>
+      </div>
+      <div class="lcol">
+        <div class="item"><span class="sq" style="background:#6d28d9">25</span><b>Tanzania:</b> opposition leader Tundu Lissu convicted of sedition</div>
+        <div class="item"><span class="sq" style="background:#475569">26</span><b>Istanbul:</b> Turkey takes control of Sozcu TV</div>
+        <div class="item"><span class="sq" style="background:#b3231b">27</span><b>Basra:</b> fire at a power station kills four</div>
+        <div class="item"><span class="sq" style="background:#1d4e89">28</span><b>Gaza:</b> Israeli strike kills three people in an aid vehicle</div>
+        <div class="item"><span class="sq" style="background:#0f766e">29</span><b>Yemen:</b> Houthis and the Saudi-led coalition trade strikes</div>
+        <div class="item"><span class="sq" style="background:#b45309">30</span><b>Tokyo:</b> Saudi oil stockpile deal &mdash; up to 8m barrels for Japan's reserves</div>
+        <div class="item"><span class="sq" style="background:#6d28d9">31</span><b>Buenos Aires:</b> Argentina's country risk tops 1,000 points</div>
+        <div class="item"><span class="sq" style="background:#475569">32</span><b>Taipei:</b> Taiwan flags 2,700 China-linked accounts to Meta</div>
+        <div class="item"><span class="sq" style="background:#b3231b">33</span><b>Tokyo:</b> Japanese Tobacco faces an $8.9bn hit as Russia seizes its holdings</div>
+        <div class="item"><span class="sq" style="background:#1d4e89">34</span><b>Naypyidaw:</b> Myanmar says it is 'disappointed' by the World Court ruling</div>
+      </div>
+      <div class="lcol">
+        <div class="item"><span class="sq" style="background:#0f766e">35</span><b>Melbourne:</b> new research may rewrite the human family tree</div>
+        <div class="item"><span class="sq" style="background:#b45309">36</span><b>Copenhagen:</b> Denmark urges EU travel bans on Russians after a foiled plot</div>
+        <div class="item"><span class="sq" style="background:#6d28d9">37</span><b>Podgorica:</b> Montenegro refuses land concessions to Croatia</div>
+        <div class="item"><span class="sq" style="background:#475569">38</span><b>Abuja:</b> Nigeria moves to end jail terms for failed suicide attempts</div>
+        <div class="item"><span class="sq" style="background:#b3231b">39</span><b>Brasilia:</b> Lula strengthens Indigenous land protection alongside Raoni</div>
+        <div class="item"><span class="sq" style="background:#1d4e89">40</span><b>Rome:</b> court orders a youth returned to Ukraine, a first under martial law</div>
+        <div class="item"><span class="sq" style="background:#0f766e">41</span><b>Khartoum:</b> army says RSF strongholds dismantled across West Kordofan</div>
+        <div class="item"><span class="sq" style="background:#b45309">42</span><b>London:</b> the Princess of Wales announces she is in remission</div>
+        <div class="item"><span class="sq" style="background:#6d28d9">43</span><b>Turin:</b> Alcaraz beats Shelton to reach the ATP Finals final</div>
+        <div class="item"><span class="sq" style="background:#475569">44</span><b>Yamanashi:</b> a pilotless air taxi carries its first passenger</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="datecheck"><b>DATE CHECK</b> &nbsp;Left out on purpose, first reported before Saturday: the World Court's Myanmar genocide ruling and the Shenzhen three-way summit (both Thu 19 Nov); the House release on 879,000 AI-chip licences for China (Thu 19 Nov); Anthropic's Nasdaq debut (Thu 19 Nov); the pancreatic-cancer pill results from Barcelona (Fri 20 Nov); GTA VI's launch (Thu 19 Nov). <b>Not yet:</b> NATO's council meets on Poland (Mon); Estonia's crossings close (1 Dec); a COP31 deal &mdash; the talks were still running.</div>
+
+<div class="footer">
+  <div class="l">Every story here happened, or was first reported, on Saturday 21 November 2026; claims are attributed.</div>
+  <div class="mid"><span class="tag conf">CONFIRMED</span> on the record <span class="tag off">OFFICIALS</span> officials say <span class="tag rep">REPORTED</span> news report</div>
+  <div class="r">Sources: AP, Reuters, AFP, NYT, Euronews, ESA &amp; others</div>
+</div>
+
+</div></div></div>
+<script>
+var LAND = [
+".....................................###............#.............#..........#..........#.......",
+"................###.###.##..........######....................#...........#.....................",
+".............#####.#####.###.......########.................#.......#........#..........#.......",
+"............#################......#######...............##.....#......#.......#......#....#....",
+"...############################.....#####.........############################################..",
+"...#############################.................#############################################..",
+"....###########################......#.....#....#############################################...",
+".....#######.##################..................##########################################.....",
+"...............###############.................##########################################.......",
+"................#############...................##########..###....#################............",
+"...............###############................####.########....####...##############.###........",
+"...............################...............###..#..#.########........############.##.........",
+"...............###############..............########################################............",
+"................############................####################....######.########.............",
+"...................######...................################.........#####.####.................",
+"....................####.....................###############............#########...............",
+"...........................######..............##########................###########.####.......",
+".............................#########..........########.......................########.........",
+".............................#########...........########.....................###########.......",
+"............................#########.............######......................##########...#....",
+"............................#######...............#####........................########....##...",
+"...........................#####..................###.......................................#...",
+"...........................####.................................................................",
+"...........................###..................................................................",
+"...........................##...................................................................",
+"...........................##...................................................................",
+"...........................#...................................................................."
+];
+var svg = document.getElementById('worldmap');
+var NS = 'http://www.w3.org/2000/svg';
+for (var r = 0; r < LAND.length; r++) {
+  var row = LAND[r];
+  for (var c = 0; c < row.length; c++) {
+    if (row.charAt(c) === '#') {
+      var dot = document.createElementNS(NS, 'circle');
+      dot.setAttribute('cx', (c * 5 + 2.5).toFixed(1));
+      dot.setAttribute('cy', (r * 5 + 2.5).toFixed(1));
+      dot.setAttribute('r', 1.8);
+      dot.setAttribute('fill', '#aebbc2');
+      svg.appendChild(dot);
+    }
+  }
+}
+</script>
+</body>
+</html>
